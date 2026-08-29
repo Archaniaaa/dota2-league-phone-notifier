@@ -1,0 +1,63 @@
+name: Bug report
+description: Report reproducible Queue Ping behavior without sharing private topics or logs.
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Never post your ntfy topic, config.json, full publish URL, account information, or unreviewed logs.
+  - type: dropdown
+    id: game
+    attributes:
+      label: Game mode
+      options:
+        - Dota 2
+        - League of Legends (experimental)
+        - Test notification only
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 24H2
+    validations:
+      required: true
+  - type: input
+    id: powershell
+    attributes:
+      label: PowerShell version
+      placeholder: Windows PowerShell 5.1 or PowerShell 7.x
+    validations:
+      required: true
+  - type: dropdown
+    id: transition
+    attributes:
+      label: Did the manual foreground-transition test work?
+      options:
+        - "Yes"
+        - "No"
+        - Not tested
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and reproduction steps
+      description: Remove topics, URLs containing topics, usernames, and local paths.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed ntfy topics, private configuration, usernames, account information, and unrelated logs.
+          required: true
