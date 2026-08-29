@@ -8,6 +8,7 @@ Logs/
 *.sha256
 .validation-*/
 *.validation.json
+docs/assets/queue-ping-social-preview.png
 
 # Common operating-system files.
 Thumbs.db
