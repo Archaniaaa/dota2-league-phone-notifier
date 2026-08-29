@@ -1,0 +1,14 @@
+# Runtime configuration and logs contain installation-specific data.
+config.json
+Logs/
+*.log
+
+# Release and local validation artifacts.
+*.zip
+*.sha256
+.validation-*/
+*.validation.json
+
+# Common operating-system files.
+Thumbs.db
+.DS_Store
