@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here.
 
+## [Unreleased]
+
+### Added
+
+- Privacy-first GitHub Pages landing site with search metadata, structured data, sitemap, robots policy, FAQ, and accessible responsive layout.
+- Original Queue Ping social-preview artwork and redesigned README introduction.
+- Contribution guide, issue templates, and a community sharing kit.
+- Additional discovery topics and project website metadata on GitHub.
+
+### Security
+
+- The public site loads no analytics, advertising, cookies, forms, external scripts, or payment services.
+- Publication checks cover saved configuration secrets, local usernames, email addresses, credentials, and non-whitelisted files.
+
 ## [1.1.0] - 2026-08-29
 
 ### Added
