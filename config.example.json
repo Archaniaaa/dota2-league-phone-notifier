@@ -1,0 +1,7 @@
+{
+  "NtfyServer": "https://ntfy.sh",
+  "Topic": "dota-replace-with-a-long-random-secret",
+  "PollIntervalMs": 250,
+  "ConfirmationDelayMs": 750,
+  "Priority": "max"
+}
