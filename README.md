@@ -1,22 +1,48 @@
-# Dota 2 / League of Legends Queue Phone Notifier
+# Dota 2 Match Found Phone Notifier for Windows
 
-This Windows notifier watches one signal: after you select a game and arm it, the selected game becomes the foreground application and remains there for a short confirmation period. It then sends one urgent push through [ntfy](https://docs.ntfy.sh/publish/) and disarms. Dota mode watches `dota2.exe`; experimental League mode watches `LeagueClientUx.exe`. It does not read game memory, inject code, inspect traffic, alter game files, send game input, or click **Accept**.
+<p align="center">
+  <img src="docs/assets/queue-ping-social-preview.jpg" alt="Queue Ping sends a Dota 2 match-found alert from a Windows PC to a phone" width="100%">
+</p>
+
+<p align="center"><strong>Queue Ping lets you step away from a long queue without missing the ready check.</strong></p>
+
+<p align="center">
+  <a href="https://github.com/Archaniaaa/dota2-league-phone-notifier/releases/latest"><strong>Download the latest release</strong></a>
+  · <a href="https://archaniaaa.github.io/dota2-league-phone-notifier/">Project website</a>
+  · <a href="SECURITY.md">Security</a>
+</p>
+
+**Free · Open source · Windows 10/11 · No administrator access · No game automation · No telemetry**
+
+Queue Ping sends one urgent [ntfy](https://docs.ntfy.sh/publish/) notification when Dota 2 brings itself to the foreground for a found match, then it disarms. You return to the PC and accept manually. Dota 2 mode is tested with a real match; League of Legends Ready Check support is available as an experimental foreground-only mode.
+
+It does **not** read game memory, inject code, inspect network traffic, modify game files, send input, click **Accept**, collect analytics, show advertising, or process payments.
+
+## Download and 60-second setup
+
+1. Download `Dota2-League-Phone-Notifier-v1.1.0.zip` from the [latest GitHub release](https://github.com/Archaniaaa/dota2-league-phone-notifier/releases/latest).
+2. Extract the ZIP to Documents and install the official ntfy mobile app.
+3. Start Dota 2 or the League client, then double-click `Start-DotaMatchNotifier.cmd`.
+4. Let Queue Ping generate a private topic, subscribe to that exact topic on the phone, and send a test alert.
+5. Start matchmaking, Alt+Tab to Queue Ping, and press Enter to arm it.
+
+Do not run the scripts directly from inside the ZIP. Windows may show a downloaded-file warning because the scripts are open source but not commercially code-signed; review the source and release checksum before running it.
+
+## Why Queue Ping
+
+- **Leave the desk:** get a phone alert instead of watching a long Dota 2 queue.
+- **Know what it does:** the entire implementation is one readable PowerShell script with no external modules.
+- **Keep control:** it never accepts a match or automates gameplay.
+- **Keep your data private:** the random ntfy topic is stored only under your Windows user profile and omitted from logs.
+- **Test safely first:** both games support a harmless manual foreground-transition test before a real queue.
+
+## How detection works
+
+After you select a game and arm Queue Ping, it waits for the selected game to transition from a non-game foreground application to the Windows foreground application and remain there for a short confirmation period. Dota mode watches `dota2.exe`; experimental League mode watches `LeagueClientUx.exe`.
 
 Game State Integration is intentionally not used. GSI normally reports `WAIT_FOR_PLAYERS_TO_LOAD` or `HERO_SELECTION` after the ready-check/Accept stage, which is too late for this job. Process creation, window titles, console logs, and audio recognition are not reliable match-found signals either.
 
 League mode uses the same foreground-only design. Riot does not document queue pop as a guaranteed foreground transition, so League support is experimental: it works only when `LeagueClientUx.exe` actually becomes the Windows foreground process during Ready Check.
-
-## Download and quick start
-
-1. Download `Dota2-League-Phone-Notifier-v1.1.0.zip` from the [latest GitHub release](https://github.com/Archaniaaa/dota2-league-phone-notifier/releases/latest).
-2. Extract the ZIP to a normal user-writable folder such as Documents.
-3. Install the official ntfy app on the phone.
-4. Start Dota 2 or the League client.
-5. Double-click `Start-DotaMatchNotifier.cmd` and follow the prompts.
-6. On first run, let the script generate a private topic and subscribe to that exact topic in ntfy.
-7. Send a test notification before joining a real queue.
-
-Do not run the scripts directly from inside the ZIP. Windows may show a downloaded-file warning because the scripts are open source but not commercially code-signed; review the source and release checksum before running it.
 
 ## Prerequisites
 
@@ -261,3 +287,12 @@ Do not leave the PC unattended during initial League testing. Missing Ready Chec
 ## Technical behavior
 
 The script uses `GetForegroundWindow` and `GetWindowThreadProcessId` from `user32.dll`, then safely resolves the process and compares it with the selected profile (`dota2` or `LeagueClientUx`). It polls every 250 ms by default, waits 750 ms to confirm a candidate transition, publishes UTF-8 text with an eight-second HTTP timeout, and retries temporary delivery failure at most twice. CPU use should remain negligible. The main script is compatible with Windows PowerShell 5.1 and PowerShell 7 and requires no external modules.
+
+## Community
+
+- Found a problem? Use the privacy-aware GitHub bug-report template.
+- Want to improve Queue Ping? Read [CONTRIBUTING.md](CONTRIBUTING.md).
+- Want to introduce it to other players? Use the honest, non-spam copy in [SHARING.md](SHARING.md).
+- Security and secret-handling guidance is in [SECURITY.md](SECURITY.md).
+
+Queue Ping is independent open-source software and is not endorsed by Valve or Riot Games.
