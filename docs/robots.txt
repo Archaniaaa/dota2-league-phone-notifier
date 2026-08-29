@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://archaniaaa.github.io/dota2-league-phone-notifier/sitemap.xml
